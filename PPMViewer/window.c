@@ -54,7 +54,7 @@ window* window_init(int width, int height, const char* title)
 	return window_object;
 }
 
-void window_loop(window* window)
+void window_loop(window* window, char* file_path)
 {
 	float vertices[] = {
 		// positions          // colors           // texture coords
@@ -85,7 +85,7 @@ void window_loop(window* window)
 	glEnableVertexAttribArray(1);
 	glEnableVertexAttribArray(2);
 
-	texture* tex = texture_init("Assets/Images/smiley.ppm");
+	texture* tex = texture_init(file_path);
 
 	while(!glfwWindowShouldClose(window->glfw_window_ptr))
 	{

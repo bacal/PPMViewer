@@ -16,6 +16,6 @@ typedef struct WINDOW_STRUCT
 }window;
 
 window* window_init(int width, int height, const char* title);
-void window_loop(window* window);
+void window_loop(window* window, char* file_path);
 
 #endif //INDIGO_WINDOW_H_
