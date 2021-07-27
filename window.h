@@ -2,8 +2,8 @@
 // Created by Bacal Mesfin on 7/18/2021.
 //
 
-#ifndef INDIGO_WINDOW_H_
-#define INDIGO_WINDOW_H_
+#ifndef _WINDOW_H_
+#define _WINDOW_H_
 #include "open_gl.h"
 #include <GLFW/glfw3.h>
 
@@ -18,4 +18,4 @@ typedef struct WINDOW_STRUCT
 window* window_init(int width, int height, const char* title);
 void window_loop(window* window, char* file_path);
 
-#endif //INDIGO_WINDOW_H_
+#endif //_WINDOW_H_

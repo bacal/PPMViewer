@@ -1,7 +1,6 @@
 #include <stdio.h>
-#include "PPMViewer/window.h"
-#include "PPMViewer/shader.h"
-#include "PPMViewer/ppm_loader.h"
+#include "window.h"
+
 int main(int argc, char** argv)
 {
 

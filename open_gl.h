@@ -3,8 +3,8 @@
 //
 
 /* GLEW On Windows/Linux, Apple's Implementation on macOS */
-#ifndef __INDIGO__OPEN_GL_H__
-#define __INDIGO__OPEN_GL_H__
+#ifndef ____OPEN_GL_H__
+#define ____OPEN_GL_H__
 
 #if defined(__APPLE_CC__)
 #define GL_SILENCE_DEPRECATION
@@ -17,4 +17,4 @@
 
 /* GLFW3 included on all systems */
 #include <GLFW/glfw3.h>
-#endif /*__INDIGO__OPEN_GL_H__*/
+#endif /*____OPEN_GL_H__*/
