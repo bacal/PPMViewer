@@ -1,0 +1,23 @@
+cmake_minimum_required(VERSION 3.10)
+project(PPMViewer)
+
+set(CMAKE_C_STANDARD 99)
+
+if(APPLE)
+    find_package(glfw3 REQUIRED)
+    include_directories(/usr/local/include)
+    link_libraries("-framework OpenGL" glfw)
+elseif(UNIX)
+    set(OpenGL_GL_PREFERENCE GLVND)
+    find_package(GLEW REQUIRED)
+    find_package(OpenGL REQUIRED)
+    find_package(glfw3 REQUIRED)
+    link_libraries(OpenGL glfw GLEW cglm)
+elseif(WIN32)
+    find_package(OpenGL REQUIRED)
+    find_package(GLEW REQUIRED)
+    include_directories($(GLEW_INCLUDE_DIRS))
+    link_libraries(opengl32 glfw3 glew32)
+endif()
+
+add_library(PPMViewer SHARED window.c shader.c shader.h texture.c texture.h ppm_loader.c ppm_loader.h vertex_array.c vertex_array.h vertex_buffer.c vertex_buffer.h index_buffer.c index_buffer.h)
