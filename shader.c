@@ -100,6 +100,58 @@ shader* shader_init(const char* vertex_source_path, const char* fragment_source_
     return shader_object;
 }
 
+shader* shader_init_str(const char* vertex_source, const char* fragment_source)
+{
+  int success;
+    unsigned int vertex_id = glCreateShader(GL_VERTEX_SHADER);
+    glShaderSource(vertex_id,1,(const GLchar* const*)&vertex_source,NULL);
+    glCompileShader(vertex_id);
+
+    glGetShaderiv(vertex_id, GL_COMPILE_STATUS, &success);
+    if(!success)
+    {
+        char* error_log = malloc(512);
+        glGetShaderInfoLog(vertex_id, 512, NULL, error_log);
+        printf("Error: failed to compile vertex shader\n%s",error_log);
+        free(error_log);
+        return NULL;
+    }
+
+    unsigned int fragment_id = glCreateShader(GL_FRAGMENT_SHADER);
+    glShaderSource(fragment_id,1,(const GLchar* const*)&fragment_source,NULL);
+    glCompileShader(fragment_id);
+
+    glGetShaderiv(fragment_id, GL_COMPILE_STATUS, &success);
+    if(!success)
+    {
+        char* error_log = malloc(512);
+        glGetShaderInfoLog(fragment_id, 512, NULL, error_log);
+        printf("Error: failed to compile fragment shader\n%s",error_log);
+        free(error_log);
+        return NULL;
+    }
+   
+    shader* shader_object = malloc(sizeof(struct SHADER_STRUCT));
+    shader_object->shader_program_id = glCreateProgram();
+    glAttachShader(shader_object->shader_program_id, vertex_id);
+    glAttachShader(shader_object->shader_program_id, fragment_id);
+    glLinkProgram(shader_object->shader_program_id);
+
+    glGetProgramiv(shader_object->shader_program_id, GL_LINK_STATUS, &success);
+
+    if(!success)
+    {
+        char* error_log = malloc(512);
+        glGetShaderInfoLog(shader_object->shader_program_id, 512, NULL, error_log);
+        printf("Error: failed to compile fragment shader\n%s",error_log);
+        free(error_log);
+        return NULL;
+    }
+    printf("Shaders successfully compiled!\n");
+    shader_object->in_use = false;
+    return shader_object;
+}
+
 void shader_use(shader* shader_name)
 {
     if(!shader_name->in_use)

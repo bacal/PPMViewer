@@ -16,6 +16,13 @@ void GLAPIENTRY open_gl_debug_message_callback(GLenum source, GLenum type, GLuin
 	fprintf(stderr, "[Open GL %s] (0x%x): \n%s\n",type==GL_DEBUG_TYPE_ERROR?"Error":"Debug Message",type,message);
 }
 #endif
+
+const char* fragment_shader_src="#version 330 core\nin vec3 fColor;\nin vec2 fTexCoord;\nout vec4 color;\nuniform sampler2D tex;\nvoid main() {\ncolor = texture(tex,fTexCoord);\n}";
+
+const char* vertex_shader_src="#version 330\nlayout (location=0) in vec3 aPos;\nlayout (location=1) in vec3 aColor;\nlayout (location=2) in vec2 aTexCoord;\nout vec3 fColor;\nout vec2 fTexCoord;\nvoid main() {\n    fColor = aColor;\n    fTexCoord = aTexCoord;\n    gl_Position = vec4(aPos, 1.0);\n}";
+
+
+
 window* window_init(int width, int height, const char* title)
 {
     window* window_object = malloc(sizeof(struct WINDOW_STRUCT));
@@ -68,7 +75,7 @@ void window_loop(window* window, char* file_path)
 		1, 2, 3    // second triangle
 	};
 
-	shader* shader_object = shader_init("Assets/Shaders/default.vert","Assets/Shaders/default.frag");
+	shader* shader_object = shader_init_str(vertex_shader_src,fragment_shader_src);
 	unsigned int vao;
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);

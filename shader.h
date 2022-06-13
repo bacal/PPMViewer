@@ -9,7 +9,7 @@ typedef struct SHADER_STRUCT
 }shader;
 
 shader* shader_init(const char* vertex_source_path, const char* fragment_source_path);
-
+shader* shader_init_str(const char* vertex_source_str, const char* fragment_source_str);
 void shader_use(shader* shader_name);
 
 void shader_detatch(shader* shader_name);

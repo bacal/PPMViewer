@@ -20,4 +20,4 @@ elseif(WIN32)
     link_libraries(opengl32 glfw3 glew32)
 endif()
 
-add_executable(PPMViewer SHARED window.c shader.c texture.c ppm_loader.c vertex_array.c vertex_buffer.c index_buffer.c)
+add_executable(PPMViewer main.c window.c shader.c texture.c ppm_loader.c vertex_array.c vertex_buffer.c index_buffer.c)
